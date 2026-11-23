@@ -711,6 +711,12 @@ class RegionSelector:
         self.canvas.bind("<B1-Motion>", self._on_drag)
         self.canvas.bind("<ButtonRelease-1>", self._on_release)
         self.overlay.bind("<Escape>", self._on_cancel)
+        self.overlay.bind("<Button-3>", self._on_cancel)
+        self.canvas.bind("<Button-3>", self._on_cancel)
+        self.overlay.lift()
+        self.overlay.attributes("-topmost", True)
+        self.overlay.focus_force()
+        self.overlay.after(50, self.overlay.focus_force)
 
     def _on_press(self, event):
         self.start_x, self.start_y = event.x_root, event.y_root
